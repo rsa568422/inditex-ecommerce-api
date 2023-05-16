@@ -3,9 +3,7 @@ package org.inditex.ecommerce.api;
 import org.iditex.ecommerce.model.entities.Product;
 import org.iditex.ecommerce.model.repositories.ProductRepository;
 import org.inditex.ecommerce.api.data.ProductData;
-import org.inditex.ecommerce.api.services.ProductService;
 import org.inditex.ecommerce.api.services.ProductServiceImpl;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -24,7 +22,6 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 @SpringBootTest
 class InditexEcommerceApiApplicationTests {
@@ -34,12 +31,6 @@ class InditexEcommerceApiApplicationTests {
 
 	@Spy
 	private ProductRepository repository;
-
-	/*@BeforeEach
-	void setUp() {
-		repository = spy(ProductRepository.class);
-		service = new ProductServiceImpl(repository);
-	}*/
 
 	@ParameterizedTest(name = "contextLoads for file {argumentsWithNames}")
 	@ValueSource(strings = {"product", "size-1", "stock"})
