@@ -13,12 +13,9 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -50,14 +47,7 @@ class InditexEcommerceApiApplicationTests {
 		verify(repository, times(1)).findAll();
 		assertAll(
 				() -> assertEquals("5, 1, 3", joiner.toString()),
-				() -> {
-					Set<Product> expected = Stream.of(
-							ProductData.PRODUCTS.get(1L),
-							ProductData.PRODUCTS.get(3L),
-							ProductData.PRODUCTS.get(5L)
-					).sorted().collect(Collectors.toCollection(LinkedHashSet::new));
-					assertEquals(expected, products);
-				}
+				() -> assertEquals(ProductData.findVisiblesOrderBySequence(), products)
 		);
 	}
 
