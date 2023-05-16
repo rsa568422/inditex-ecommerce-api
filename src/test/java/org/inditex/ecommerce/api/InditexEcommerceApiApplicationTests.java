@@ -3,13 +3,13 @@ package org.inditex.ecommerce.api;
 import org.iditex.ecommerce.model.entities.Product;
 import org.iditex.ecommerce.model.repositories.ProductRepository;
 import org.inditex.ecommerce.api.data.ProductData;
-import org.inditex.ecommerce.api.services.ProductServiceImpl;
+import org.inditex.ecommerce.api.services.ProductService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.InjectMocks;
-import org.mockito.Spy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
@@ -26,10 +26,10 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class InditexEcommerceApiApplicationTests {
 
-	@InjectMocks
-	private ProductServiceImpl service;
+	@Autowired
+	private ProductService service;
 
-	@Spy
+	@SpyBean
 	private ProductRepository repository;
 
 	@ParameterizedTest(name = "contextLoads for file {argumentsWithNames}")
