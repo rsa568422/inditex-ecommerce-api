@@ -1,6 +1,5 @@
 package org.inditex.ecommerce.api.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.iditex.ecommerce.model.entities.Product;
 import org.inditex.ecommerce.api.data.ProductData;
 import org.junit.jupiter.api.*;
@@ -24,15 +23,8 @@ class ProductControllerIntegrationTest {
     @Autowired
     private TestRestTemplate client;
 
-    private ObjectMapper objectMapper;
-
     @LocalServerPort
     private int port;
-
-    @BeforeEach
-    void setUp() {
-        objectMapper = new ObjectMapper();
-    }
 
     @Test
     @Order(1)
