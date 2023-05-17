@@ -1,6 +1,7 @@
 package org.inditex.ecommerce.api.data;
 
 import org.iditex.ecommerce.model.entities.Product;
+import org.inditex.ecommerce.api.persistence.entities.ProductDto;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -18,6 +19,14 @@ public class ProductData {
             new Product(4L, 13L, SizeData.findByProductId(4L)),
             new Product(5L, 6L, SizeData.findByProductId(5L))
     ).collect(Collectors.groupingBy(Product::getId, Collectors.collectingAndThen(Collectors.toList(), list -> list.get(0))));
+
+    public static final Map<Long, ProductDto> DTO = Stream.of(
+            new ProductDto(1L, 10L, SizeData.findDtoByProductId(1L)),
+            new ProductDto(2L, 7L, SizeData.findDtoByProductId(2L)),
+            new ProductDto(3L, 15L, SizeData.findDtoByProductId(3L)),
+            new ProductDto(4L, 13L, SizeData.findDtoByProductId(4L)),
+            new ProductDto(5L, 6L, SizeData.findDtoByProductId(5L))
+    ).collect(Collectors.groupingBy(ProductDto::getId, Collectors.collectingAndThen(Collectors.toList(), list -> list.get(0))));
 
     public static Set<Product> findAll() {
         return new HashSet<>(PRODUCTS.values());
