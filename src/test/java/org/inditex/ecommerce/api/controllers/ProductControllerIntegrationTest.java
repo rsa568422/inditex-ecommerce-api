@@ -1,8 +1,10 @@
 package org.inditex.ecommerce.api.controllers;
 
 import org.iditex.ecommerce.model.entities.Product;
-import org.inditex.ecommerce.api.data.ProductData;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -12,9 +14,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Objects;
-import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -30,12 +32,14 @@ class ProductControllerIntegrationTest {
     @Order(1)
     void testFindVisiblesOrderBySequence() {
         ResponseEntity<Product[]> response = client.getForEntity(getFullUri("/api/products"), Product[].class);
-        Set<Product> products = Set.of(Objects.requireNonNull(response.getBody()));
+        Product[] products = Objects.requireNonNull(response.getBody());
 
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
                 () -> assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType()),
-                () -> assertEquals(ProductData.findVisiblesOrderBySequence(), products)
+                () -> assertEquals(5L, products[0].getId()),
+                () -> assertEquals(1L, products[1].getId()),
+                () -> assertEquals(3L, products[2].getId())
         );
     }
 
