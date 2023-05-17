@@ -1,9 +1,9 @@
 package org.inditex.ecommerce.api.data;
 
 import org.iditex.ecommerce.model.entities.Stock;
+import org.inditex.ecommerce.api.persistence.entities.StockDto;
 
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -27,8 +27,22 @@ public class StockData {
             new Stock(54L, 10L)
     ).collect(Collectors.groupingBy(Stock::getSizeId, Collectors.collectingAndThen(Collectors.toList(), list -> list.get(0))));
 
-    public static Optional<Stock> findBySizeId(Long sizeId) {
-        return Optional.ofNullable(STOCKS.get(sizeId));
-    }
+    public static final Map<Long, StockDto> DTO = Stream.of(
+            new StockDto(11L, 0L),
+            new StockDto(12L, 0L),
+            new StockDto(13L, 0L),
+            new StockDto(22L, 0L),
+            new StockDto(31L, 10L),
+            new StockDto(32L, 10L),
+            new StockDto(33L, 10L),
+            new StockDto(41L, 0L),
+            new StockDto(42L, 0L),
+            new StockDto(43L, 0L),
+            new StockDto(44L, 10L),
+            new StockDto(51L, 10L),
+            new StockDto(52L, 10L),
+            new StockDto(53L, 10L),
+            new StockDto(54L, 10L)
+    ).collect(Collectors.groupingBy(StockDto::getSizeId, Collectors.collectingAndThen(Collectors.toList(), list -> list.get(0))));
 
 }
