@@ -1,5 +1,7 @@
 package org.inditex.ecommerce.api.persistence.repositories;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.iditex.ecommerce.model.entities.Product;
 import org.iditex.ecommerce.model.repositories.ProductRepository;
 import org.inditex.ecommerce.api.persistence.entities.ProductDto;
@@ -9,6 +11,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductH2RepositoryAdapter implements ProductRepository {
 
     @Autowired

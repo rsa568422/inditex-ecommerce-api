@@ -32,4 +32,39 @@ class ProductDtoTest {
 
         assertEquals(ProductData.PRODUCTS.get(id), product);
     }
+
+    @ParameterizedTest(name = "testConstructorAndSetters for id {argumentsWithNames}")
+    @ValueSource(strings = {"1", "2", "3", "4", "5"})
+    void testConstructorAndSetters(String param) {
+        Long id = Long.valueOf(param);
+        ProductDto expected = ProductData.DTO.get(id);
+
+        ProductDto dtoA = new ProductDto(expected.getId(), expected.getSequence(), expected.getSizes());
+        ProductDto dtoB = new ProductDto();
+        dtoB.setId(expected.getId());
+        dtoB.setSequence(expected.getSequence());
+        dtoB.setSizes(expected.getSizes());
+
+        assertAll(
+                () -> assertEquals(expected, dtoA),
+                () -> assertEquals(expected, dtoB),
+                () -> assertEquals(dtoA, dtoB),
+                () -> assertEquals(dtoB, dtoA)
+        );
+    }
+
+    @ParameterizedTest(name = "testToStringAndHashCode for id {argumentsWithNames}")
+    @ValueSource(strings = {"1", "2", "3", "4", "5"})
+    void testToStringAndHashCode(String param) {
+        Long id = Long.valueOf(param);
+        ProductDto expected = ProductData.DTO.get(id);
+
+        ProductDto dtoA = new ProductDto(expected.getId(), expected.getSequence(), expected.getSizes());
+
+        assertAll(
+                () -> assertEquals(expected.toString(), dtoA.toString()),
+                () -> assertEquals(expected.hashCode(), dtoA.hashCode())
+        );
+    }
+
 }

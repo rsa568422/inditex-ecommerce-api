@@ -29,4 +29,41 @@ class SizeDtoTest {
 
         assertEquals(SizeData.SIZES.get(id), size);
     }
+
+    @ParameterizedTest(name = "testConstructorAndSetters for id {argumentsWithNames}")
+    @ValueSource(strings = {"11", "12", "13", "21", "22", "23", "31", "32", "33", "41", "42", "43", "44", "51", "52", "53", "54"})
+    void testConstructorAndSetters(String param) {
+        Long id = Long.valueOf(param);
+        SizeDto expected = SizeData.DTO.get(id);
+
+        SizeDto dtoA = new SizeDto(expected.getId(), expected.getProductId(), expected.isBackSoon(), expected.isSpecial(), expected.getStock());
+        SizeDto dtoB = new SizeDto();
+        dtoB.setId(expected.getId());
+        dtoB.setProductId(expected.getProductId());
+        dtoB.setBackSoon(expected.isBackSoon());
+        dtoB.setSpecial(expected.isSpecial());
+        dtoB.setStock(expected.getStock());
+
+        assertAll(
+                () -> assertEquals(expected, dtoA),
+                () -> assertEquals(expected, dtoB),
+                () -> assertEquals(dtoA, dtoB),
+                () -> assertEquals(dtoB, dtoA)
+        );
+    }
+
+    @ParameterizedTest(name = "testToStringAndHashCode for id {argumentsWithNames}")
+    @ValueSource(strings = {"11", "12", "13", "21", "22", "23", "31", "32", "33", "41", "42", "43", "44", "51", "52", "53", "54"})
+    void testToStringAndHashCode(String param) {
+        Long id = Long.valueOf(param);
+        SizeDto expected = SizeData.DTO.get(id);
+
+        SizeDto dtoA = new SizeDto(expected.getId(), expected.getProductId(), expected.isBackSoon(), expected.isSpecial(), expected.getStock());
+
+        assertAll(
+                () -> assertEquals(expected.toString(), dtoA.toString()),
+                () -> assertEquals(expected.hashCode(), dtoA.hashCode())
+        );
+    }
+
 }
