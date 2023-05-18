@@ -37,6 +37,7 @@ class ProductControllerIntegrationTest {
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
                 () -> assertEquals(MediaType.APPLICATION_JSON, response.getHeaders().getContentType()),
+                () -> assertEquals(3, products.length),
                 () -> assertEquals(5L, products[0].getId()),
                 () -> assertEquals(1L, products[1].getId()),
                 () -> assertEquals(3L, products[2].getId())
